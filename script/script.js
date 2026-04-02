@@ -12,16 +12,6 @@ document.addEventListener("DOMContentLoaded", function(){
       window.scrollBy( 0, $('#'+tab_id)[0].getBoundingClientRect().top-80);
     });
 
-    // sub tab
-    $('.tab-sort li').click(function() {
-        const tab_id = $(this).attr('data-tab');
-
-        $('.tab-sort li').removeClass('active');
-        $('.sort-cont').removeClass('active');
-
-        $(this).addClass('active');
-        $('#'+tab_id).addClass('active');
-    });
 
     // floating button 
     $(window).scroll(function() {
