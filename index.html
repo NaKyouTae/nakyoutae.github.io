@@ -77,6 +77,8 @@
                                                 <li><p>Prometheus/Grafana/Loki/Tempo 기반 모니터링 시스템 구축</p></li>
                                                 <li><p>외부 포스(POS) 시스템 연동 및 페이허브/나이스페이먼츠 PG 연동</p></li>
                                                 <li><p>키오스크 주문 기능, 간편 주문 기능 개발</p></li>
+                                                <li><p>JVM Heap OOM 위험 대응 — Heap Dump 분석 기반 소통 버퍼 최적화로 OOM 리스크 사전 제거</p></li>
+                                                <li><p>결제 프로세스 재설계 — 분산된 결제 방식을 단일 프로세스로 통합하고 에러 메시지 정규화</p></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -196,6 +198,45 @@
                                             <h4>TMR Founders <span class="desktop-only">Backend Developer</span><i class="ic-link" onclick="window.open('https://tag-here.info/')"></i></h4>
                                         </div>
                                         <p>테이블오더 서비스 태그히어(TagHere) 설계 및 개발</p>
+                                        <div class="desc">
+                                            <h4>테이블오더(태그히어) 신규 서비스 JVM Heap OOM 위험 대응</h4>
+                                            <ul>
+                                                <li><p>Kotlin / Spring Boot / JPA / Spring Security / Spring WebSocket / Liquibase / MySQL / Redis / Redisson / AWS / Gradle</p></li>
+                                                <li><p>Prometheus / Grafana / Loki / Promtail / Tempo / OpenTelemetry</p></li>
+                                            </ul>
+                                            <h6>내용</h6>
+                                            <ul>
+                                                <li><p>소통 버퍼 최적화</p></li>
+                                                <li style="margin-left: 20px"><p>모니터링 알림으로 JVM Heap 사용량이 총 2GB 중 1.9GB(약 90%)까지 도달하여 OOM 식별 및 대응</p></li>
+                                                <li style="margin-left: 20px"><p>Heap Dump를 포함한 POS 결제의 소통 흐름에서 약 30MB 상당의 비정상적인 크기의 객체들이 대량으로 보관되어 있었음을 탐지</p></li>
+                                                <li style="margin-left: 20px"><p>DB에서 필요 수준 대비 크기를 파악 조사하여 최소 단 19KB로 감량한 더 작은 요청 객체를 생성하여 데이터 전달량 감소</p></li>
+                                            </ul>
+                                            <h6>성과</h6>
+                                            <ul>
+                                                <li><p>Heap Dump 분석 기반 근본 원인 추적 및 데이터 기반 감소로 JVM Heap OOM 리스크를 사전에 제거하고 안정적인 운영 환경 확보</p></li>
+                                            </ul>
+                                        </div>
+                                        <div class="desc">
+                                            <h4>테이블오더(태그히어) 신규 서비스 결제 프로세스 재설계</h4>
+                                            <ul>
+                                                <li><p>Kotlin / Spring Boot / JPA / Spring Security / Spring WebSocket / Liquibase / MySQL / Redis / Redisson / AWS / Gradle</p></li>
+                                                <li><p>Prometheus / Grafana / Loki / Promtail / Tempo / OpenTelemetry</p></li>
+                                            </ul>
+                                            <h6>내용</h6>
+                                            <ul>
+                                                <li><p>결제 프로세스 재설계</p></li>
+                                                <li style="margin-left: 20px"><p>한번에 결제, 나눠서 결제, 나중에 직접 결제 등 각 결제 방식별 분산된 프로세스를 단일 체계의 프로세스로 통합</p></li>
+                                                <li style="margin-left: 20px"><p>나눠서 결제 시 예상 실시간 결제 전에서 실 결제 시점으로 재설정하여 유효시간이 오래된 주문이 실 결제 가능하도록 개선</p></li>
+                                                <li style="margin-left: 20px"><p>결제 시 동시성 문제를 해결하기 위해 Redisson 분산락을 활용</p></li>
+                                                <li style="margin-left: 20px"><p>결제하기, 결제중, 주문 등 총 6건 다른 프로세스를 추가하여 보수적이며 안정적인 관리가 가능하도록 모니터링 강화</p></li>
+                                                <li style="margin-left: 20px"><p>PG 연동 방식을 인증결제에서 비인증 결제로 전환하여 결제 프로세스 간소화</p></li>
+                                                <li style="margin-left: 20px"><p>3가지 이상의 서로 다른 에러 메시지 형식을 정규화하여 사용자에게 일관된 에러 정보를 구체적으로 전달</p></li>
+                                            </ul>
+                                            <h6>성과</h6>
+                                            <ul>
+                                                <li><p>결제 프로세스 통합으로 비효율적이었던 주문 데이터 관리 및 결제 관련 파편화 감소로 운영 리스크 절감</p></li>
+                                            </ul>
+                                        </div>
                                         <div class="desc">
                                             <h4>테이블오더(태그히어) 신규 서비스 설계 및 개발</h4>
                                             <ul>
