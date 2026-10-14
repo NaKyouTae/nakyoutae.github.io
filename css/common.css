@@ -1,184 +1,88 @@
-/* document --------------------------- */
-*, *::after, *::before {
-    box-sizing: border-box;
-}
-
-html, body {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: var(--white);
-    margin: 0;
-    padding: 0;
-    border: 0;
-    /* web font + system font */
-    font-family: 'Poppins', 'Pretendard', -apple-system, BlinkMacSystemFont, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji!important;
-    font-size: 62.5%; /* 1rem = 1rem */
-    font-weight: 400;
-    letter-spacing: -0.02rem;
-    color: var(--black);
-    /* smoothing font */
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    transition: color .6s, background-color .6s;
-}
-
-/* typography --------------------------- */
-h1, h2, h3, h4, h5, h6 {
-    clear: both;
-    margin: 0;
-    padding: 0;
-}
-
-b, strong {
-    /* add the correct font weight in Chrome, Edge, and Safari */
-    font-weight: 600;
-}
-
-/* list style --------------------------- */
-ul, ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-/* embedded content --------------------------- */
-img {
-    /* remove the border on images inside links in IE 10 */
-    border-style: none;
-}
-
-/* form --------------------------- */
-button, input, textarea, select, option {
-    /* web font + system font */
-    font-family: 'Poppins', 'Pretendard', -apple-system, BlinkMacSystemFont, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji!important;
-    /* Remove the inheritance of text transform in Edge, Firefox and IE. */
-    text-transform: none;
-    background-color: transparent;
-    font-weight: 400;
-    color: var(--black);
-    /* Show the overflow in Edge and IE. */
-    overflow: visible;
-    cursor: pointer;
-}
-
-button:disabled, input:disabled {
-    cursor: not-allowed;
-}
-
-button, [type='button'], [type='reset'], [type='submit'] {
-    /* correct the inability to style clickable types in iOS and Safari */
-    appearance: button;
-    -moz-appearance: button;
-    -webkit-appearance: button;
-}
-
-[type='checkbox'], [type='radio'] {
-    /* remove the padding in IE 10 */
-    padding: 0;
-    margin: 0;
-}
-
-textarea {
-    width: 100%;
-    /* remove the default vertical scrollbar in IE 10+ */
-    overflow: auto;
-    resize: none;
-}
-
-/* link --------------------------- */
-a {
-    color: var(--black);
-    text-decoration: none;
-    /* remove the gray background on active links in IE 10 */
-    background-color: transparent;
-    cursor: pointer;
-}
-
-a:visited, a:hover, a:active {
-    color: var(--black);
-    text-decoration: none;
-}
-
-a:focus {
-    color: var(--black);
-    text-decoration: none;
-}
-
-:focus {
-    outline: none;
-}
-
-/* scroll */
-::-webkit-scrollbar {width: .4rem; height: .4rem; background-color: transparent;}
-::-webkit-scrollbar-thumb {background-color: var(--gray200); border-radius: 1rem; background-clip: padding-box;}
-::-webkit-scrollbar-track {background-color: transparent;}
-
-/* root ----------------------- */
+/* tokens ------------------------------ */
 :root {
-    --black: #121212;
-    --white: #FDFDFE;
+    --bg: #FFFFFF;
+    --surface: #F6F7F8;
+    --surface-2: #EDEEF0;
+    --text: #17181B;
+    --text-2: #45474D;
+    --text-3: #868991;
+    --border: #E4E5E8;
+    --accent: #3B86F7;
+    --accent-weak: #E2EDFE;
+    --accent-line: #A9C9FB;
+    --selection: #CFE0FD;
+    --shadow: 0 1px 2px rgba(17, 24, 39, .04), 0 4px 16px rgba(17, 24, 39, .04);
 
-    --red: #AE0401;
-    --blue: #226AF4;
-    --yellow: #F2C94C;
-
-    --gray400: #4F4F4F; /* font */
-    --gray300: #888888; /* font */
-    --gray200: #E4E4E4; /* border */
-    --gray100: #F2F2F2; /* background */
+    /* legacy aliases */
+    --black: var(--text);
+    --white: var(--bg);
+    --blue: var(--accent);
+    --gray400: var(--text-2);
+    --gray300: var(--text-3);
+    --gray200: var(--border);
+    --gray100: var(--surface);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-
-        --black: #FDFDFE;
-        --white: #1E1E20;
-
-        --gray400: #E4E4E4;
-        --gray200: #4F4F4F;
-        --gray100: #333333;
+        --bg: #131416;
+        --surface: #1B1C1F;
+        --surface-2: #25262A;
+        --text: #F1F2F4;
+        --text-2: #C3C5CB;
+        --text-3: #8B8E96;
+        --border: #2C2D32;
+        --accent: #6AA5FA;
+        --accent-weak: rgba(59, 134, 247, .14);
+        --accent-line: rgba(59, 134, 247, .40);
+        --selection: rgba(59, 134, 247, .32);
+        --shadow: none;
     }
 }
 
-/* common ------------------------------ */
-::selection {background-color: var(--yellow);}
-::-moz-selection {background-color: var(--yellow);}
+/* document ------------------------------ */
+*, *::after, *::before {box-sizing: border-box;}
 
-/* font style */
-.underline {text-decoration: underline; text-underline-offset: .4rem;}
+html {font-size: 62.5%; scroll-behavior: smooth; scroll-padding-top: 8rem;}
 
-/* button */
-button {font-size: 1.6rem; width: fit-content; height: fit-content; padding: 0; margin: 0; border: 0; background-color: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer;}
-
-/* cont-box box */
-.cont-box + .cont-box {margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--gray200);}
-
-.box {display: flex; flex-flow: column; row-gap: 2rem;}
-.box + .box {margin-top: 3rem;}
-.box > p {font-size: 1.6rem; line-height: 1.6;}
-
-/* title */
-.title {display: flex; align-items: center; justify-content: space-between;}
-.title > h4 {font-size: 1.8rem; font-weight: 600;}
-
-@media screen and (max-width: 767px) {
-    .title > h4 {font-size: 2rem;}
+body {
+    margin: 0;
+    min-height: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* tab menu */
-.tab-wrap {margin-top: -1rem; padding-top: 1rem; background-color: var(--white); position: sticky; top: 0; z-index: 99; border-radius: 0 0 .6rem .6rem}
-.tab-menu {width: 100%; padding: .4rem; margin-bottom: 3rem; border-radius: .6rem; background-color: var(--gray100); display: flex; align-items: center; column-gap: .4rem;}
-.tab-menu > li {width: calc(100% - .8rem - .8rem); height: 3.2rem; font-size: 1.4rem; color: var(--gray300); border-radius: .4rem; background-color: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer;}
-.tab-menu > li.active {font-weight: 600; color: var(--black); background-color: var(--white);}
+h1, h2, h3, h4, h5, h6 {margin: 0; padding: 0;}
+b, strong {font-weight: 700;}
+ul, ol {margin: 0; padding: 0; list-style: none;}
+img {border-style: none;}
 
-.tab-cont {display: none;}
-.tab-cont.active {display: block;}
+a, a:visited {color: inherit; text-decoration: none;}
 
-.tab-sort {display: flex; align-items: center; column-gap: .8rem;}
-.tab-sort > li {display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--gray300); cursor: pointer;}
-.tab-sort > li.active {font-weight: 600; color: var(--blue);}
-.tab-sort > li + li::before {content: ''; display: block; width: 1px; height: 1.2rem; background-color: var(--gray200); margin-right: .8rem;}
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
 
-.sort-cont {display: none;}
-.sort-cont.active {display: block;}
+:focus-visible {outline: 2px solid var(--accent); outline-offset: 2px; border-radius: .4rem;}
+
+::selection {background-color: var(--selection);}
+
+::-webkit-scrollbar {width: .6rem; height: .6rem;}
+::-webkit-scrollbar-thumb {background-color: var(--surface-2); border-radius: 1rem;}
+::-webkit-scrollbar-track {background-color: transparent;}
+
+.underline {text-decoration: underline; text-decoration-color: var(--accent-line); text-decoration-thickness: .2rem; text-underline-offset: .4rem;}
