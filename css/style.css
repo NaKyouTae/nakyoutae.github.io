@@ -89,6 +89,12 @@ a:hover {color: var(--accent);}
 .item-head > h4 {min-width: 0; font-size: 1.9rem; font-weight: 700; line-height: 1.45; letter-spacing: -0.02em; word-break: keep-all;}
 .item-link {margin-left: .6rem; font-size: 1.3rem; font-weight: 500; color: var(--text-3); text-decoration: underline; text-underline-offset: .3rem;}
 
+/* project role: first block above 성과, same label column as 성과/내용 */
+.block.is-role {padding-top: .2rem; padding-bottom: .2rem;}
+.block.is-role > h5 {color: var(--text);}
+.role-text {font-size: 1.6rem; font-weight: 600; line-height: 1.75; color: var(--text);}
+.block.is-role + .block {margin-top: 1.6rem;}
+
 .block {display: grid; grid-template-columns: minmax(0, 1fr); row-gap: .8rem; padding: 0 2rem;}
 .block + .block {margin-top: 2.8rem;}
 .block > h5 {font-size: 1.3rem; font-weight: 600; color: var(--text-3);}
@@ -164,6 +170,7 @@ a:hover {color: var(--accent);}
     .item-head > h4 {font-size: 1.75rem;}
     .block {padding: 0 1.6rem;}
     .block.is-result {padding: 1.4rem 1.6rem;}
+    .role-text {font-size: 1.5rem;}
     .block li {font-size: 1.5rem;}
 
 }
@@ -186,7 +193,7 @@ a:hover {color: var(--accent);}
     .company.is-compact {break-inside: avoid;}
     /* let long projects flow across pages; keep titles with their first lines */
     .item {break-inside: auto;}
-    .item-head, .block > h5 {break-after: avoid;}
+    .item-head, .block.is-role, .block > h5 {break-after: avoid;}
     .block li, .block.is-result {break-inside: avoid;}
     .section > h2, .item-head, .career-total, .company-bar {position: static; margin: 0; padding: 0; box-shadow: none;}
     .company-bar {padding-bottom: 1.2rem; break-after: avoid;}

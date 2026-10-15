@@ -68,15 +68,17 @@
                         </dl>
                     </header>
                         <ul class="highlight-list">
-                            <li><p>신규 서버 <strong>모듈러 모놀리스</strong> 아키텍처 설계 및 JSON 문자열로 저장되던 주문 데이터를 주문·주문상품·주문옵션 테이블로 정규화</p></li>
+                            <li><p>설계 착수 6개월 만에 <strong>모듈러 모놀리스</strong> 기반 신규 서버를 운영 오픈하고, 영업 중인 매장에 영향이 없도록 레거시와 병행하며 단계적으로 이관하여 월 약 <strong>33만 명</strong>이 신규 서버로 주문</p></li>
+                            <li><p>JSON 문자열로 저장하던 주문·옵션 데이터를 정규화하고, POS 테이블 정리 신호 기반 방문 세션을 도입해 주문을 방문 단위로 관리</p></li>
                             <li><p>한번에·나눠서·키오스크 결제 프로세스 재설계 — Redisson 분산 락으로 동시 결제 제어, PG 콜백(S2S)·리다이렉트 멱등 처리</p></li>
-                            <li><p>POS 연동을 Redis Pub/Sub 기반 <strong>다중 인스턴스</strong> 구조로 전환하고 무중단 배포 기반 마련</p></li>
-                            <li><p>이지포스 신규 연동, POS 테이블 점유 시 재전송 정책, POS별 마스터 동기화 범위 설정 기능 개발</p></li>
+                            <li><p>저녁 피크 자동 확장에도 POS 주문 전송이 끊기지 않도록 Redis Pub/Sub 기반 <strong>다중 인스턴스</strong> 구조로 전환</p></li>
+                            <li><p>이지포스 신규 연동, POS 테이블 점유 시 재전송, POS가 실제 수신한 뒤에만 주문 접수 처리, 동기화 항목 On/Off 기능 개발</p></li>
                             <li><p>WebSocket 버퍼 재산정으로 세션당 메모리 <strong>30MB → 1.1MB</strong>, JVM Heap OOM 위험 제거</p></li>
                             <li><p>주문 번호 채번 장애 대응 및 만료 토큰 TTL 정리로 Redis 메모리 사용량 <strong>85%</strong> 절감</p></li>
                             <li><p>Prometheus·Grafana·Loki·Tempo 모니터링과 로그 기반 실시간 관제 시스템 구축</p></li>
-                            <li><p>레거시 서버 POS 4종(매직포스·유니온포스·페이앤포스·오케이포스) 및 페이허브 PG 연동</p></li>
-                            </ul>
+                            <li><p>비개발 구성원의 AI 작성 코드까지 팀 설계 규칙으로 점검하는 PR AI 코드리뷰·CI 게이트 도입, 아키텍처·장애 대응 사내 공유</p></li>
+                            <li><p>레거시 서버 POS 선불 결제 연동 고도화, 페이허브 결제 후 화면 이탈로 인한 주문 누락 해결, 네이버 플레이스 영수증 없는 리뷰 연동</p></li>
+                        </ul>
                 </article>
                 <article class="company">
                     <div class="company-bar">
