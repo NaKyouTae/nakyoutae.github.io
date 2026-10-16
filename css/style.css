@@ -1,5 +1,8 @@
 /* page: full width, document style ------------------------------ */
-.page {width: 100%; padding: 0 16rem 8rem;}
+.page {width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 0 8rem;}
+@media screen and (max-width: 1279px) {
+    .page {padding: 0 4rem 8rem;}
+}
 
 .todo {display: inline-block; padding: .1rem .8rem; border: 1px dashed var(--text-3); border-radius: .4rem; font-size: .85em; font-weight: 500; color: var(--text-3);}
 
@@ -185,7 +188,7 @@ a:hover {color: var(--accent);}
     @page {margin: 14mm 12mm;}
     html {font-size: 50%;}
     body {-webkit-print-color-adjust: exact; print-color-adjust: exact;}
-    .page {padding: 0;}
+    .page {max-width: none; padding: 0;}
     .header {padding-top: 0;}
     .photo:not(:has(img)) {visibility: hidden;}
     .section {grid-template-columns: 12rem minmax(0, 1fr); column-gap: 3.2rem;}
