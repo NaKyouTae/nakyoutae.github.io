@@ -66,7 +66,7 @@
                             <div><dt>신규 서버</dt><dd>Kotlin · Spring Boot · JPA · Spring Security · Spring WebSocket · Spring Events · Liquibase · Redisson · Gradle · Kotest · MockK</dd></div>
                             <div><dt>레거시 서버</dt><dd>TypeScript · Express · Prisma · Socket.IO</dd></div>
                             <div><dt>데이터베이스</dt><dd>MySQL(AWS RDS) · MongoDB(Atlas) · Redis(AWS ElastiCache)</dd></div>
-                            <div><dt>인프라</dt><dd>AWS ECS · ALB · S3 · SQS · CloudWatch · CodeBuild · GitHub Actions · Docker</dd></div>
+                            <div><dt>인프라</dt><dd>AWS ECS · ALB · S3 · SQS · CloudFront · Lambda · CloudWatch · CodeBuild · GitHub Actions · Docker</dd></div>
                             <div><dt>모니터링</dt><dd>Prometheus · Grafana · Loki · Promtail · Tempo · OpenTelemetry · Datadog · Sentry</dd></div>
                         </dl>
                     </header>
@@ -223,6 +223,39 @@
                                 <ul>
                                     <li><p>WebSocket 세션당 버퍼 메모리 <strong>30MB → 1.1MB</strong>(약 96% 감소)로 최적화해 메모리 압박 완화</p></li>
                                     <li><p>일평균 약 3만 건의 오류 로그를 매장 및 심각도 기준으로 분류하여 운영팀의 장애 식별 지원</p></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="item">
+                        <div class="item-head">
+                            <h4>AWS 인프라 비용 분석 및 최적화</h4>
+                        </div>
+                        <div class="item-body">
+                            <div class="block">
+                                <h5>문제 및 제약</h5>
+                                <ul>
+                                    <li><p>레거시·신규 운영 환경과 개발 환경의 AWS 비용이 월 <strong>$4,516</strong>까지 증가</p></li>
+                                    <li><p>CDN에서 원본 이미지를 그대로 전송해 요청당 평균 <strong>1.2MB</strong>, 월 7.9TB 데이터 전송 비용 발생</p></li>
+                                    <li><p>Datadog 연동용 CloudWatch Metric Stream·Kinesis와 WAF 로그 적재, 미사용 Client VPN 등 고정 비용 누적</p></li>
+                                </ul>
+                            </div>
+                            <div class="block">
+                                <h5>설계 및 기술적 판단</h5>
+                                <ul>
+                                    <li><p>Cost Explorer로 환경·서비스·사용 유형별 비용을 분해해 데이터 전송, 상시 과금 리소스, 관측 비용을 주요 원인으로 도출</p></li>
+                                    <li><p>CloudFront 전송량·요청 수 지표로 원본 이미지 전송을 확인하고, API Gateway·Lambda 기반 서버리스 이미지 변환으로 요청 시점 리사이즈·포맷 변환 적용</p></li>
+                                    <li><p>Datadog을 Prometheus·Grafana 기반 모니터링으로 전환하고, 연동에 쓰던 Metric Stream·Kinesis·WAF 로그 적재 및 미사용 Client VPN 제거</p></li>
+                                    <li><p>ElastiCache CPU 평균 3%·메모리 12% 지표를 근거로 노드 사양 하향, NAT Gateway 통합 및 공인 IPv4 정리</p></li>
+                                    <li><p>EFS 처리량 모드를 Elastic에서 Provisioned로 전환하고, 개발 환경의 Fargate·ElastiCache 노드·CloudWatch 알람 축소</p></li>
+                                </ul>
+                            </div>
+                            <div class="block is-result">
+                                <h5>구현 결과</h5>
+                                <ul>
+                                    <li><p>월 AWS 비용 <strong>$4,516 → $2,801</strong>(<strong>38% 절감</strong>, 연 약 $20K), 신규 서버 확장에 따른 컴퓨팅 비용 증가 포함</p></li>
+                                    <li><p>이미지 요청당 전송량 <strong>1.2MB → 19KB</strong>(약 98% 감소), CloudFront 비용 <strong>$825 → $84</strong>(90% 절감)</p></li>
+                                    <li><p>환경별 절감률 레거시 운영 41%, 신규 운영 32%, 개발 42%, CloudWatch 비용 <strong>$444 → $2</strong></p></li>
                                 </ul>
                             </div>
                         </div>
